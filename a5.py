@@ -134,6 +134,7 @@ class Board:
                 if col == []:
                     return True
         return False
+    
     def goal_test(self) -> bool:
         """Check if we've completed the puzzle (if we've placed all the numbers).
         Naively checks that we've placed as many numbers as cells on the board
@@ -155,7 +156,18 @@ class Board:
             column - index of the column to assign
             assignment - value to place at given row, column coordinate
         """
-        pass
+        self.rows[row][column] = assignment
+        self.num_nums_placed += 1
+
+        for c in range(self.size):
+            remove_if_exists(self.rows[row][c], assignment)
+
+        for r in range(self.size):
+            remove_if_exists(self.rows[r][column], assignment)
+
+        subgrid_coords = self.subgrid_coordinates(row, column)
+        for (r, c) in subgrid_coords:
+            remove_if_exists(self.rows[r][c], assignment)
 
 
 def DFS(state: Board) -> Board:
@@ -170,7 +182,20 @@ def DFS(state: Board) -> Board:
     Returns:
         either None in the case of invalid input or a solved board
     """
-    pass
+    the_stack = Stack((state))
+    the_stack.push(state)
+    while not the_stack.is_empty():
+        current_board: Board = the_stack.pop()
+        if current_board.goal_test():
+            return current_board
+        row, col = current_board.find_most_constrained_cell()
+        possible_values = current_board.rows[row][col]
+        if not current_board.failure_test():
+            for value in possible_values:
+                new_board = copy.deepcopy(current_board)
+                new_board.update(row, col, value)
+                the_stack.push(new_board)
+    return None
 
 
 def BFS(state: Board) -> Board:
@@ -185,7 +210,21 @@ def BFS(state: Board) -> Board:
     Returns:
         either None in the case of invalid input or a solved board
     """
-    pass
+    the_stack = Stack((state))
+    the_stack.push(state)
+    #while not the_stack.is_empty():
+        #current_board: Board = the_stack.pop()
+        #if current_board.goal_test():
+            #return current_board
+        #row, col = current_board.find_most_constrained_cell()
+    #   possible_values = current_board.rows[row][col]
+    #   if not current_board.failure_test():
+    #       for value in possible_values:
+    #          new_board = copy.deepcopy(current_board)
+    #          new_board.update(row, col, value)
+    #          the_stack.push(new_board)
+    # return None
+
 
 
 if __name__ == "__main__":
