@@ -210,20 +210,20 @@ def BFS(state: Board) -> Board:
     Returns:
         either None in the case of invalid input or a solved board
     """
-    the_stack = Stack((state))
-    the_stack.push(state)
-    #while not the_stack.is_empty():
-        #current_board: Board = the_stack.pop()
-        #if current_board.goal_test():
-            #return current_board
-        #row, col = current_board.find_most_constrained_cell()
-    #   possible_values = current_board.rows[row][col]
-    #   if not current_board.failure_test():
-    #       for value in possible_values:
-    #          new_board = copy.deepcopy(current_board)
-    #          new_board.update(row, col, value)
-    #          the_stack.push(new_board)
-    # return None
+    the_Queue = Queue((state))
+    the_Queue.push(state)
+    while not the_Queue.is_empty():
+        current_board: Board = the_Queue.pop()
+        if current_board.goal_test():
+            return current_board
+        row, col = current_board.find_most_constrained_cell()
+        possible_values = current_board.rows[row][col]
+        if not current_board.failure_test():
+          for value in possible_values:
+             new_board = copy.deepcopy(current_board)
+             new_board.update(row, col, value)
+             the_Queue.push(new_board)
+    return None
 
 
 
