@@ -23,7 +23,7 @@ After completing the assignment, answer the following reflection questions:
 
 1. What are some things that you learned through this assignment? Think about the concepts of backtracking, constraint satisfaction, and search algorithms. Were there any particular challenges you faced while implementing the Board class methods or the DFS/BFS functions? How did you overcome them? 
 
-I have learned how to implement DFS and BFS into code when making a program that needs it, even if i still stuggle to understand how to actually implement any of it. I learned about deep and surface copying and when each should be used, and nothing much more. It's not easy to understand anything that is going on. 
+I have learned how to implement DFS and BFS into code when making a program that needs it, even if i still stuggle to understand how to actually implement any of it. I learned about deep and surface copying and when each should be used, and nothing much more. It's not easy to understand anything that is going on. My debugging and reading the code to understand what is going on did improve, as it helped alot when trying to figure out what I did wrong when instating the third moves for the BFS v.s. DFS tests. 
 
 
 
